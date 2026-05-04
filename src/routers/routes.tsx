@@ -7,35 +7,30 @@ import Login from '@/Pages/Login/Login'
 import PostDetail from '@/Pages/PostDetail/PostDetail'
 import Category from '@/Pages/manage/Categories/Category'
 import Dashboard from '@/Pages/manage/Dashboard/Dashboard'
-import PostList from '@/Pages/manage/Posts/PostList/PostList'
+import Post from '@/Pages/manage/Posts/Post'
 import Tag from '@/Pages/manage/Tags/Tag'
 
 export const routes: RouteObject[] = [
+  // ── Public blog ──────────────────────────────────────────────────────
   {
-    path: '/',
+    path: '/blog',
     element: <MainLayout />,
     children: [
       {
-        path: 'posts/:slug',
+        path: ':slug',
         element: <PostDetail />
       }
     ]
   },
+
+  // ── Admin panel (root) ───────────────────────────────────────────────
   {
-    path: '/login',
-    element: <Login />
-  },
-  {
-    path: '/dashboard',
-    element: <Navigate to='/admin/dashboard' replace />
-  },
-  {
-    path: '/admin',
+    path: '/',
     element: <AdminLayout />,
     children: [
       {
         index: true,
-        element: <Navigate to='dashboard' replace />
+        element: <Dashboard />
       },
       {
         path: 'dashboard',
@@ -43,7 +38,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: 'posts',
-        element: <PostList />
+        element: <Post />
       },
       {
         path: 'categories',
@@ -55,10 +50,28 @@ export const routes: RouteObject[] = [
       },
       {
         path: '*',
-        element: <Navigate to='dashboard' replace />
+        element: <Navigate to='/' replace />
       }
     ]
   },
+
+  // ── Auth ─────────────────────────────────────────────────────────────
+  {
+    path: '/login',
+    element: <Login />
+  },
+
+  // ── Backward compat: /admin/* → / ────────────────────────────────────
+  {
+    path: '/admin',
+    element: <Navigate to='/' replace />
+  },
+  {
+    path: '/admin/dashboard',
+    element: <Navigate to='/' replace />
+  },
+
+  // ── Catch all ────────────────────────────────────────────────────────
   {
     path: '*',
     element: <Navigate to='/' replace />

@@ -32,11 +32,11 @@ import {
 } from "@/components/ui/table"
 import { Dialog } from "@/components/ui/dialog"
 import { type ColumnDef } from "@tanstack/react-table"
-import type { Tag } from "./AddTag"
-import { EditTag } from "./EditTag"
+import type { Category } from "./AddCategory"
+import { EditCategory } from "./EditCategory"
 
 // ─── Column Definitions ─────────────────────────────────────────────
-export const columns: ColumnDef<Tag>[] = [
+export const columns: ColumnDef<Category>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -153,13 +153,13 @@ export const columns: ColumnDef<Tag>[] = [
     {
         id: "actions",
         header: () => <span className="sr-only">Actions</span>,
-        cell: ({ row }) => <TagRowActions tag={row.original} />,
+        cell: ({ row }) => <CategoryRowActions category={row.original} />,
         enableHiding: false,
     },
 ]
 
 // ─── Row Actions ─────────────────────────────────────────────────────
-function TagRowActions({ tag }: { tag: Tag }) {
+function CategoryRowActions({ category }: { category: Category }) {
     const [isEditOpen, setIsEditOpen] = React.useState(false)
 
     return (
@@ -194,12 +194,12 @@ function TagRowActions({ tag }: { tag: Tag }) {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem variant="destructive" className="gap-2">
                             <Trash2 className="size-4" />
-                            Xóa tag
+                            Xóa category
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <EditTag
-                    tag={tag}
+                <EditCategory
+                    category={category}
                     onClose={() => setIsEditOpen(false)}
                     onSuccess={() => {
                         // Re-fetch data if needed
@@ -211,11 +211,11 @@ function TagRowActions({ tag }: { tag: Tag }) {
 }
 
 // ─── Table Component ──────────────────────────────────────────────────
-interface TableTagProps {
-    table: TableType<Tag>
+interface TableCategoryProps {
+    table: TableType<Category>
 }
 
-export function TableTag({ table }: TableTagProps) {
+export function TableCategory({ table }: TableCategoryProps) {
     return (
         <div className="overflow-hidden rounded-lg border">
             <Table>
@@ -251,7 +251,7 @@ export function TableTag({ table }: TableTagProps) {
                             <TableCell colSpan={columns.length} className="h-24 text-center">
                                 <div className="flex flex-col items-center gap-1 text-muted-foreground">
                                     <Search className="size-8 opacity-40" />
-                                    <span>Không tìm thấy tag nào.</span>
+                                    <span>Không tìm thấy category nào.</span>
                                 </div>
                             </TableCell>
                         </TableRow>

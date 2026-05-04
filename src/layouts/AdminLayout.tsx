@@ -17,11 +17,11 @@ import {
 
 // Map route paths to breadcrumb labels
 const routeLabels: Record<string, string> = {
-  '/admin': 'Admin',
-  '/admin/dashboard': 'Dashboard',
-  '/admin/posts': 'Posts',
-  '/admin/categories': 'Category',
-  '/admin/tags': 'Tag',
+  '/': 'Dashboard',
+  '/dashboard': 'Dashboard',
+  '/posts': 'Posts',
+  '/categories': 'Category',
+  '/tags': 'Tag',
 }
 
 function getBreadcrumbs(pathname: string) {
@@ -46,12 +46,12 @@ export default function AdminLayout() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+        <header className="flex h-14 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator
               orientation="vertical"
-              className="mr-2 data-[orientation=vertical]:h-4"
+              className="mr-2 my-2 data-[orientation=vertical]:h-4"
             />
             <Breadcrumb>
               <BreadcrumbList>

@@ -23,7 +23,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
@@ -32,6 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
+import { TablePagination } from "@/components/ui/table-pagination"
 
 import { type Tag, AddTag } from "./AddTag"
 import { TableTag, columns } from "./TableTag"
@@ -94,13 +94,11 @@ export default function Tag() {
     getSortedRowModel: getSortedRowModel(),
   })
 
-  const selectedCount = table.getFilteredSelectedRowModel().rows.length
-  const totalCount = table.getFilteredRowModel().rows.length
 
   return (
     <section className="flex flex-col gap-6">
       {/* Page header */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <h1 className="m-0 text-2xl! font-semibold tracking-tight text-foreground">
           Quản lý Tags
         </h1>
@@ -195,37 +193,10 @@ export default function Tag() {
         </div>
       </div>
 
-      {/* Table */}
-      <TableTag table={table} />
-
-      {/* Footer Info */}
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-muted-foreground">
-          {selectedCount > 0
-            ? `Đã chọn ${selectedCount} / ${totalCount} tag.`
-            : `Tổng ${totalCount} tag.`}
-        </div>
-        
-        <div className="flex items-center gap-2">
-            <Label htmlFor="rows-per-page" className="text-sm font-medium whitespace-nowrap">
-              Hiển thị
-            </Label>
-            <Select
-              value={`${table.getState().pagination.pageSize}`}
-              onValueChange={(value) => table.setPageSize(Number(value))}
-            >
-              <SelectTrigger size="sm" className="w-18" id="rows-per-page">
-                <SelectValue placeholder={table.getState().pagination.pageSize} />
-              </SelectTrigger>
-              <SelectContent side="top">
-                {[10, 20, 30, 50].map((pageSize) => (
-                  <SelectItem key={pageSize} value={`${pageSize}`}>
-                    {pageSize}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+      {/* Table + Pagination */}
+      <div className="flex flex-col gap-4">
+        <TableTag table={table} />
+        <TablePagination table={table} rowsPerPageId="tag-rows-per-page" />
       </div>
     </section>
   )

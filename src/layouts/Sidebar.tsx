@@ -27,7 +27,7 @@ import {
 const navMain = [
   {
     title: 'Dashboard',
-    url: '/admin/dashboard',
+    url: '/',
     icon: Gauge,
   },
   {
@@ -35,9 +35,9 @@ const navMain = [
     url: '#',
     icon: BookOpenText,
     items: [
-      { title: 'Posts', url: '/admin/posts' },
-      { title: 'Category', url: '/admin/categories' },
-      { title: 'Tag', url: '/admin/tags' },
+      { title: 'Posts', url: '/posts' },
+      { title: 'Category', url: '/categories' },
+      { title: 'Tag', url: '/tags' },
     ],
   },
 ]
@@ -53,7 +53,7 @@ export function AppSidebar({
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <NavLink to="/admin/dashboard">
+              <NavLink to="/">
                 <div className="flex size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <UserRound className="size-4" />
                 </div>
